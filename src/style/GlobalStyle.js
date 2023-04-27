@@ -10,10 +10,10 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
         border: none;
         border-radius: 5px;
-        background-color: #a328d6;
+        background-color: #512378;
         font-size: 20px;
         font-weight: 600;
-        color: #fff;
+        color: white;
         cursor: pointer;
         width: 100%;
         padding: 12px;
@@ -25,12 +25,14 @@ const GlobalStyle = createGlobalStyle`
     }
     input {
         font-size: 20px;
+        background: #DCD8C9A1;
         width: calc(100% - 30px);
         border-radius: 5px;
         outline: none;
-        border: 1px solid #ccc;
+        border: 3px solid #DCD8C9A1;
         padding: 15px;
         margin: 1px;
+        color: white;
         :focus {
             border: 2px solid #ffb6b6;
             margin: 0px;

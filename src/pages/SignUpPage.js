@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import BuyCarEasylogo from "../images/BuyCarEasy-logo.png"
+
 export default function SignUpPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -35,6 +37,8 @@ export default function SignUpPage() {
 
   return (
     <SingUpContainer>
+      <img src={BuyCarEasylogo}></img>
+    <p>Cadastro</p>
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Nome"
@@ -83,4 +87,14 @@ const SingUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  a {
+    font-size: 16px;
+  }
+
+  p { font-size: 50px;
+      color: white;
+      font-family: 'Faster One', cursive;
+      margin-bottom: 50px;
+  }
 `
