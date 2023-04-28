@@ -27,8 +27,8 @@ export default function SignUpPage() {
     else {
       delete formData.confirmarSenha
       console.log(formData)
-      const promise = axios.post(`${process.env.REACT_API}/cadastro`, formData)
-      await promise.then((res) => {
+      const promise = axios.post(`${process.env.REACT_APP_API}/cadastro`, formData)
+      promise.then((res) => {
         console.log(res.data)
         navigate("/")
         .catch(err => console.log(err.response.data))})

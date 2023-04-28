@@ -1,33 +1,31 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BuyCarEasylogo from "../images/BuyCarEasy-logo.png"
+import AutenticacaoContext from "./contexts/AutenticacaoContext"
+import axios from "axios";
 
 export default function SignInPage() {
   const navigate = useNavigate();
-  const [token, setToken] = useState('');
-
+  const {setToken, setUsuario} = useContext(AutenticacaoContext)
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
   });
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { email, senha } = formData;
-    try {
-   //   const response = await fazerLogin(email, senha);
-    //  console.log(response);
- //     setToken(response.token);
-    } catch (error) {
-      console.log(error);
-      alert('Erro ao fazer login.');
-    }
+    axios.post(`${process.env.REACT_APP_API}/login`, formData)
+    .then(res => {
+      setToken(res.data.token)
+      setUsuario(res.data.nome)
+      navigate("/home")
+    })
+    .catch(err => console.log(err.response.data))
   };
 
   return (
