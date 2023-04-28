@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BuyCarEasylogo from "../images/BuyCarEasy-logo.png"
+import axios from "axios";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -14,26 +15,28 @@ export default function SignUpPage() {
   });
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { nome, email, senha, confirmarSenha } = formData;
-    if (senha !== confirmarSenha) {
+ 
+    if (formData.senha !== formData.confirmarSenha) {
       alert("Senhas não conferem");
-      return;
+    } 
+    else {
+      delete formData.confirmarSenha
+      console.log(formData)
+      const promise = axios.post(`${process.env.REACT_API}/cadastro`, formData)
+      await promise.then((res) => {
+        console.log(res.data)
+        navigate("/")
+        .catch(err => console.log(err.response.data))})
+      }
     }
-    try {
-     
-      alert("Cadastro realizado com sucesso!");
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      alert("Erro ao realizar cadastro.");
-    }
-  };
+      
+  
+
 
   return (
     <SingUpContainer>
@@ -46,6 +49,7 @@ export default function SignUpPage() {
           name="nome"
           value={formData.nome}
           onChange={handleInputChange}
+          required
         />
         <input
           placeholder="E-mail"
@@ -53,6 +57,7 @@ export default function SignUpPage() {
           name="email"
           value={formData.email}
           onChange={handleInputChange}
+          required
         />
         <input
           placeholder="Senha"
@@ -61,6 +66,7 @@ export default function SignUpPage() {
           value={formData.senha}
           onChange={handleInputChange}
           autoComplete="new-password"
+          required
         />
         <input
           placeholder="Confirme a senha"
@@ -69,8 +75,10 @@ export default function SignUpPage() {
           value={formData.confirmarSenha}
           onChange={handleInputChange}
           autoComplete="new-password"
+          required
         />
-        <button>Cadastrar</button>
+        <button
+        type="submit">Cadastrar</button>
       </form>
 
       <Link to="/">
@@ -87,6 +95,10 @@ const SingUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  img {
+    height: 300px;
+  }
   
   a {
     font-size: 16px;

@@ -64,6 +64,10 @@ const SingInContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  img {
+    height: 300px;
+  }
   
   a {
     font-size: 16px;
