@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import styled from "styled-components"
 import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
+import CheckoutPage from "./pages/CheckoutPage"
 import AutenticacaoContext from "./pages/contexts/AutenticacaoContext"
 import { useState } from "react"
 
@@ -19,6 +20,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/cadastro" element={<SignUpPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </BrowserRouter>
       </AutenticacaoContext.Provider>
